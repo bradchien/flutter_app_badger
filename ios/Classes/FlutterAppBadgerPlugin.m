@@ -21,7 +21,9 @@
   if ([@"updateBadgeCount" isEqualToString:call.method]) {
       NSDictionary *args = call.arguments;
       NSNumber *count = [args objectForKey:@"count"];
-      [UIApplication sharedApplication].applicationIconBadgeNumber = count.integerValue;
+      if([UIApplication sharedApplication].applicationIconBadgeNumber + count.integerValue >= 0) {
+          [UIApplication sharedApplication].applicationIconBadgeNumber += count.integerValue;
+      }
     result(nil);
   } else if ([@"removeBadge" isEqualToString:call.method]) {
       [UIApplication sharedApplication].applicationIconBadgeNumber = 0;

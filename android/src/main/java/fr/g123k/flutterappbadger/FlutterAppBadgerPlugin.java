@@ -31,7 +31,8 @@ public class FlutterAppBadgerPlugin implements MethodCallHandler {
   @Override
   public void onMethodCall(MethodCall call, Result result) {
     if (call.method.equals("updateBadgeCount")) {
-      ShortcutBadger.applyCount(context, Integer.valueOf(call.argument("count").toString()));
+      int count = Integer.valueOf(call.argument("count").toString());
+      ShortcutBadger.applyCount(context, Math.max(count, 0));
       result.success(null);
     } else if (call.method.equals("removeBadge")) {
       ShortcutBadger.removeCount(context);

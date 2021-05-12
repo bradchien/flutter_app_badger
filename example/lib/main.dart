@@ -54,13 +54,19 @@ class _MyAppState extends State<MyApp> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               new Text('Badge supported: $_appBadgeSupported\n'),
-              new RaisedButton(
-                child: new Text('Add badge'),
+              new TextButton(
+                child: new Text('Add badge + 1'),
                 onPressed: () {
-                  _addBadge();
+                  _updateBadge(1);
                 },
               ),
-              new RaisedButton(
+              new TextButton(
+                child: new Text('subtract badge - 1'),
+                onPressed: () {
+                  _updateBadge(-1);
+                },
+              ),
+              new TextButton(
                   child: new Text('Remove badge'),
                   onPressed: () {
                     _removeBadge();
@@ -72,8 +78,8 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  void _addBadge() {
-    FlutterAppBadger.updateBadgeCount(1);
+  void _updateBadge([int count = 1]) {
+    FlutterAppBadger.updateBadgeCount(count);
   }
 
   void _removeBadge() {
